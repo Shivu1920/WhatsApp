@@ -2,24 +2,31 @@
 import {Text, View, Image, StyleSheet} from 'react-native';
 
 
-const ChatListItem = () => {
+const ChatListItem = ({ chat }) => {
     return (
-        <View style={styles.container}>
-            <Image
-                source={{ uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/lukas.jpeg" }}
-                  style={styles.image}
-            />
-            <View style={styles.content}>
-                <View style={styles.row}>
-                    <Text numberOfLines={1} style={styles.name}>lukas</Text>
-                    <Text style={styles.subTitle}> 8:30</Text>
-                </View>
-                <Text numberOfLines={2} style={styles.subTitle}> Hello there</Text>
-            </View>
-            
+      <View style={styles.container}>
+        {/* User Avatar */}
+        <Image source={{ uri: chat?.user.image }} style={styles.image} />
+  
+        {/* content */}
+        <View style={styles.content}>
+          <View style={styles.row}>
+            <Text style={styles.name} numberOfLines={1}>
+              {chat?.user.name}
+            </Text>
+  
+            <Text style={styles.subTitle}>
+              {chat?.lastMessage.createdAt}
+            </Text>
+          </View>
+  
+          <Text style={styles.subTitle} numberOfLines={2}>
+            {chat?.lastMessage.text}
+          </Text>
         </View>
-    )
-};
+      </View>
+    );
+  };
 
 const styles = StyleSheet.create ({
     container: {
